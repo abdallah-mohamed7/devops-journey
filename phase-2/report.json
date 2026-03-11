@@ -1,0 +1,16 @@
+{
+  "environment": "hi",
+  "timestamp": "2026-03-11 15:12:53.771402",
+  "results": [
+    {
+      "server": "google",
+      "url": "https://google.com",
+      "status": "UP"
+    },
+    {
+      "server": "github",
+      "url": "https://github.com",
+      "status": "UP"
+    }
+  ]
+}
