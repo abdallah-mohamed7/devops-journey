@@ -2,9 +2,14 @@ import requests
 import json
 import sys
 from datetime import datetime
+import logging
+
+logging.basicConfig(level=logging.DEBUG, filename='monitor.log')
+logging.getLogger("urllib3").setLevel(logging.WARNING)
+
 
 if len(sys.argv) < 2:
-    print("Usage: python3 monitor.py <environment>")
+    logging.warning("Usage: python3 monitor.py <environment>")
     sys.exit(1)
 
 env = sys.argv[1]
@@ -25,8 +30,9 @@ for name, url in urls.items():
     except requests.exceptions.Timeout:
         status = "TIMEOUT"
 
+    logging.info(f"{status}: {name} — {url}")
     results.append({"server": name, "url": url, "status": status})
-    print(f"{status}: {name} — {url}")
+
 report = {
     "environment": env,
     "timestamp": str(datetime.now()),
@@ -38,5 +44,3 @@ with open("report.json", "w") as f:
 
 print(f"Report saved to report.json")
 
-
-     
