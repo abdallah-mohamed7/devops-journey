@@ -4,9 +4,8 @@ import sys
 from datetime import datetime
 import logging
 
-logging.basicConfig(level=logging.DEBUG, filename='monitor.log')
+logging.basicConfig(level=logging.ERROR, filename='monitor.log')
 logging.getLogger("urllib3").setLevel(logging.WARNING)
-
 
 if len(sys.argv) < 2:
     logging.warning("Usage: python3 monitor.py <environment>")
@@ -29,6 +28,10 @@ for name, url in urls.items():
         status = "DOWN"
     except requests.exceptions.Timeout:
         status = "TIMEOUT"
+    except Exception as e:
+
+        status = "ERROR"
+        logging.error(f"Unexpected error for {name}: {e}")
 
     logging.info(f"{status}: {name} — {url}")
     results.append({"server": name, "url": url, "status": status})
@@ -42,5 +45,5 @@ report = {
 with open("report.json", "w") as f:
     json.dump(report, f, indent=2)
 
-print(f"Report saved to report.json")
+logging.info(f"Report saved to report.json")
 
