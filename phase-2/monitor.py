@@ -3,15 +3,18 @@ import json
 import sys
 from datetime import datetime
 import logging
+import argparse
+
 
 logging.basicConfig(level=logging.ERROR, filename='monitor.log')
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 
-if len(sys.argv) < 2:
-    logging.warning("Usage: python3 monitor.py <environment>")
-    sys.exit(1)
+parser = argparse.ArgumentParser()
+parser.add_argument("--env", required=True)
+parser.add_argument("--timeout", type=int, default=5)
+args = parser.parse_args()
 
-env = sys.argv[1]
+env = args.env 
 
 urls = {
     "google": "https://google.com",
