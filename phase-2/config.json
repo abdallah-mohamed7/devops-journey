@@ -1,0 +1,13 @@
+{
+  "environment": "production",
+  "app": "hadith-api",
+  "version": "1.0",
+  "servers": [
+    "web-01",
+    "web-02"
+  ],
+  "database": {
+    "host": "db-01",
+    "port": 5432
+  }
+}
