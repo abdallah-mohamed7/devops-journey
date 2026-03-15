@@ -7,3 +7,9 @@ services:
       - "8082:8082"
     environment:
       - SERVER_PORT=8082
+    networks:
+      - hadith-network
+
+networks:
+    hadith-network:
+         driver: bridge 
