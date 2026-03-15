@@ -1,0 +1,6 @@
+services:
+  hadith-api:
+    image: hadith-api
+    container_name: testing
+    ports:
+      - "8082:8082"
