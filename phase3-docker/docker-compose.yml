@@ -9,7 +9,15 @@ services:
       - SERVER_PORT=8082
     networks:
       - hadith-network
-
+  db:
+     image: mysql:8
+     container_name: testingdb
+     environment:
+       - MYSQL_ROOT_PASSWORD=root
+       - MYSQL_DATABASE=hadithd
+     networks:
+       -  hadith-network
 networks:
     hadith-network:
          driver: bridge 
+    
