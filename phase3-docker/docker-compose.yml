@@ -1,4 +1,3 @@
-
 services:
   hadith-api:
     image: hadith-api
@@ -7,17 +6,23 @@ services:
       - "8082:8082"
     environment:
       - SERVER_PORT=8082
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/hadithd
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    depends_on:
+      - db
     networks:
       - hadith-network
+
   db:
-     image: mysql:8
-     container_name: testingdb
-     environment:
-       - MYSQL_ROOT_PASSWORD=root
-       - MYSQL_DATABASE=hadithd
-     networks:
-       -  hadith-network
+    image: mysql:8
+    container_name: testingdb
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=hadithd
+    networks:
+      - hadith-network
+
 networks:
-    hadith-network:
-         driver: bridge 
-    
+  hadith-network:
+    driver: bridge
