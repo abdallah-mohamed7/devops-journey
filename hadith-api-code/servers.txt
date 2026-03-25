@@ -1,0 +1,5 @@
+web-01 192.168.1.1 running 45
+web-02 192.168.1.2 stopped 0
+db-01 192.168.1.3 running 82
+db-02 192.168.1.4 running 91
+cache-01 192.168.1.5 stopped 0

@@ -1,0 +1,8 @@
+INFO: Server started on port 8080
+ERROR: Database connection failed
+INFO: Request received from 192.168.1.1
+WARNING: High memory usage detected
+ERROR: Null pointer exception in UserService
+INFO: Health check passed
+ERROR: Timeout connecting to Redis
+INFO: Request received from 10.0.0.5

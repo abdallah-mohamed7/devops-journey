@@ -1,0 +1,6 @@
+server=localhost
+port=8080
+env=development
+debug=true
+db_host=localhost
+db_port=5432
