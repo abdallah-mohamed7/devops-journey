@@ -1,13 +1,15 @@
-FROM eclipse-temurin:21-jdk-jammy AS builder
+# Use a lightweight Java runtime
+FROM eclipse-temurin:21-jre-alpine
+
+# Set the working directory
 WORKDIR /app
-COPY . .
-RUN ./mvnw package -DskipTests
 
+# Copy the JAR file that was built by the GitHub Action
+# Note: GitHub Actions puts the build result in the target/ folder
+COPY target/*.jar app.jar
 
+# Expose the port your app runs on
+EXPOSE 8082
 
-
-
-FROM eclipse-temurin:21-jdk-jammy
-WORKDIR /app
-COPY --from=builder /app/target/demo-0.0.1-SNAPSHOT.jar app.jar
-CMD ["java", "-jar", "app.jar"]
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
