@@ -1,12 +1,15 @@
 
 services:
   hadith-api:
-    image: hadith-api
+    image: abdallahmohamed7/hadith-api:latest
     container_name: testing
     ports:
       - "8082:8082"
     environment:
       - SERVER_PORT=8082
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/hadithd
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
     networks:
       - hadith-network
   db:
@@ -19,5 +22,4 @@ services:
        -  hadith-network
 networks:
     hadith-network:
-         driver: bridge 
-    
+         driver: bridge
