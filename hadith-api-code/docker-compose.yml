@@ -2,7 +2,7 @@
 services:
   hadith-api:
     image: abdallahmohamed7/hadith-api:latest
-    container_name: testing
+    container_name: hadith1
     ports:
       - "9000:8082"
     environment:
@@ -10,8 +10,12 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/hadithd
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+    depends_on:
+      db:
+        condition: service_healthy
     networks:
       - hadith-network
+    restart: unless-stopped
   db:
     image: mysql:8
     container_name: testingdb
@@ -20,8 +24,14 @@ services:
       - MYSQL_DATABASE=hadithd
     volumes:
       - hadith-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     networks:
       - hadith-network
+    restart: unless-stopped
 networks:
     hadith-network:
          driver: bridge
