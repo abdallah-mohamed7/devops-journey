@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
   db:
     image: mysql:8
-    container_name: testingdb
+    container_name: hadithdb
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=hadithd
