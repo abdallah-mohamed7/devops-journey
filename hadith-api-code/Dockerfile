@@ -12,4 +12,4 @@ COPY target/*.jar app.jar
 EXPOSE 8082
 
 # Run the application
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
