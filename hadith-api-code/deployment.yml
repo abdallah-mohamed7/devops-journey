@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hadith-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: hadith-api
+  template:
+    metadata:
+      labels:
+        app: hadith-api
+    spec:
+      containers:
+      - name: hadith-container
+        image: abdallahmohamed7/hadith-api:latest
+        ports:
+        - containerPort: 8082
