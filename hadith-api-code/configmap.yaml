@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hadith-config
+data:
+  APP_MESSAGE: "welcome to the stateless hadith API"
+  LOG_LEVEL: "DEBUG"
