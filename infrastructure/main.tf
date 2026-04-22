@@ -5,14 +5,20 @@ terraform{
     version = "~> 5.0"
   }
  }
+  backend "s3" {
+    bucket = "abdallah-devops-final-bucket-2026"
+    key    = "dev/terraform.tfstate"
+    region = "eu-north-1"
+  }
 }
 
+
 provider "aws" {
-  region = "eu-north-1"
+  region = var.aws_region
 }
 
 resource "aws_s3_bucket" "my_bucket"{
-  bucket = "abdallah-devops-bucket-abdallah-devops-bucket-2026"
+  bucket = var.bucket_name
 
   tags = {
    Name  = "My First terraform Bucket"
@@ -30,7 +36,19 @@ resource "aws_instance" "hadith_server" {
   instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.hadith_sg.id]
   key_name               = aws_key_pair.deployer.key_name # Add this line
+  user_data = <<-EOF
+              #!/bin/bash
+              sudo apt-get update
+              sudo apt-get install -y docker.io
+              sudo systemctl start docker
+              sudo systemctl enable docker
+              sudo usermod -aG docker ubuntu
+              
+              sleep 10
+              
+              sudo docker run -d --name hadith-app -p 8082:8082 -e APP_MESSAGE="Hello from Automated EC2" abdallahmohamed7/hadith-api:latest
 
+              EOF
   tags = {
     Name = "Hadith-API-Server"
   }
