@@ -5,11 +5,6 @@ terraform{
     version = "~> 5.0"
   }
  }
-  backend "s3" {
-    bucket = "abdallah-devops-final-bucket-2026"
-    key    = "dev/terraform.tfstate"
-    region = "eu-north-1"
-  }
 }
 
 
